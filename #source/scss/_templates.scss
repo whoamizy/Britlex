@@ -1,0 +1,15 @@
+@import "_variabels";
+
+%button-styles {
+	display: inline-block;
+	font-weight: 500;
+	color: #fff;
+	background-color: $accent-color;
+	border: 2px solid $accent-color;
+	transition: 0.3s;
+}
+%button-hover {
+	color: $accent-color;
+	background-color: #fff;
+	border: 2px solid $accent-color;
+}

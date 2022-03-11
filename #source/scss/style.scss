@@ -1,0 +1,765 @@
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/Poppins-Regular.ttf") format("truetype"),
+		url("../fonts/Poppins-Regular.woff") format("woff"),
+		url("../fonts/Poppins-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/Poppins-Medium.ttf") format("truetype"),
+		url("../fonts/Poppins-Medium.woff") format("woff"),
+		url("../fonts/Poppins-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/Poppins-SemiBold.ttf") format("truetype"),
+		url("../fonts/Poppins-SemiBold.woff") format("woff"),
+		url("../fonts/Poppins-SemiBold.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+}
+@import "_nullstyle";
+@import "_variabels";
+@import "_mixins";
+@import "_templates";
+body {
+	font-family: "Poppins", sans-serif;
+
+	&.lock{
+		overflow: hidden;
+	}
+}
+.header {
+	&-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		@include adaptiv-value("padding-top", 55, 36);
+		&__list {
+			display: flex;
+			align-items: center;
+		}
+		&__item:not(:last-child) {
+			@include header-adaptiv-value("margin-right", 40, 30);
+		}
+		&__link {
+			font-weight: 500;
+			@include header-adaptiv-value("font-size", 20, 16);
+			@include header-adaptiv-value("line-height", 30, 24);
+			color: $accent-color;
+			position: relative;
+			&::before {
+				position: absolute;
+				content: "";
+				bottom: -5px;
+				left: 0;
+				width: 100%;
+				height: 3px;
+				background: $accent-color;
+				transform: scaleX(0);
+				transition: 0.3s;
+			}
+			&:hover::before {
+				transform: scaleX(1);
+			}
+		}
+		&__btn {
+			@extend %button-styles;
+			@include header-adaptiv-value("font-size", 24, 18);
+			@include header-adaptiv-value("line-height", 36, 27);
+			color: #000;
+			background-color: #fff;
+			border-radius: 5px;
+			@include header-adaptiv-value("padding-top", 17, 12);
+			@include header-adaptiv-value("padding-bottom", 17, 12);
+			@include header-adaptiv-value("padding-left", 57, 40);
+			@include header-adaptiv-value("padding-right", 57, 40);
+		}
+		&__btn:hover {
+			@extend %button-hover;
+			background-color: $accent-color;
+			color: #fff;
+		}
+	}
+}
+
+.burger-menu {
+	display: none;
+	position: fixed;
+	left: -100%;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	@include adaptiv-value("margin-top", 100, 80);
+	background-color: #fff;
+	overflow: auto;
+	transition: .3s;
+
+	&.open{
+		left: 0;
+	}
+	&__link {
+		font-weight: 500;
+		font-size: 24px;
+		line-height: 60px;
+		color: $accent-color;
+		position: relative;
+		&::before {
+			position: absolute;
+			content: "";
+			bottom: -5px;
+			left: 0;
+			width: 100%;
+			height: 3px;
+			background: $accent-color;
+			transform: scaleX(0);
+			transition: 0.3s;
+		}
+		&:hover::before {
+			transform: scaleX(1);
+		}
+	}
+	&__btn-wrapper {
+		margin-top: 60px;
+	}
+	&__btn {
+		@extend %button-styles;
+		@include adaptiv-value("font-size", 24, 18);
+		@include adaptiv-value("line-height", 36, 27);
+		color: #000;
+		background-color: #fff;
+		border-radius: 5px;
+		@include adaptiv-value("padding-top", 17, 12);
+		@include adaptiv-value("padding-bottom", 17, 12);
+		@include adaptiv-value("padding-left", 57, 40);
+		@include adaptiv-value("padding-right", 57, 40);
+	}
+	&__btn:hover {
+		@extend %button-hover;
+		background-color: $accent-color;
+		color: #fff;
+	}
+}
+.container {
+	max-width: (1338 + 30) + px;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+.logo img {
+	@include adaptiv-value("width", 106, 70);
+}
+.burger {
+	display: inline-block;
+	display: none;
+	@include adaptiv-value("width", 45, 30);
+	@include adaptiv-value("height", 24, 18);
+	position: relative;
+	border: none;
+	background: transparent;
+	position: relative;
+	&__line {
+		position: absolute;
+		left: 0;
+		content: "";
+		display: inline-block;
+		background-color: $accent-color;
+		border-radius: 1px;
+		height: 4px;
+		transition: .3s;
+	}
+	&__line:nth-child(1) {
+		width: 100%;
+		top: 0;
+	}
+	&__line:nth-child(2) {
+		width: 100%;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	&__line:nth-child(3) {
+		width: 50%;
+		bottom: 0;
+		opacity: 1;
+	}
+	&.open &__line:nth-child(3){
+		opacity: 0;
+	}
+	&.open &__line:nth-child(1){
+		transform: rotate(45deg);
+		top: 10px;
+	}
+	&.open &__line:nth-child(2){
+		transform: rotate(-45deg);
+		top: 10px;
+	}
+}
+.header {
+	&-content {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap-reverse;
+		@include adaptiv-value("padding-top", 51, 36);
+		&__left {
+			max-width: 630px;
+			position: relative;
+			&::before {
+				position: absolute;
+				content: "";
+				display: inline-block;
+				@include adaptiv-value("width", 115, 50);
+				@include adaptiv-value("height", 115, 50);
+				@include adaptiv-value("right", 100, 400);
+				@include adaptiv-value("top", 100, 70);
+				background-image: url("../img/icons/lamp.svg");
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+		}
+		&__title {
+			font-weight: 600;
+			@include adaptiv-value("font-size", 64, 24);
+			@include adaptiv-value("line-height", 80, 36);
+			max-width: 386px;
+			@include adaptiv-value("margin-bottom", 40, 20);
+		}
+		&__descr {
+			@include adaptiv-value("font-size", 24, 14);
+			@include adaptiv-value("line-height", 36, 21);
+			color: $text-color;
+			@include adaptiv-value("margin-bottom", 60, 35);
+		}
+		&__btn {
+			@extend %button-styles;
+			@include adaptiv-value("font-size", 36, 15);
+			@include adaptiv-value("line-height", 54, 24);
+			@include adaptiv-value("padding-top", 32, 18);
+			@include adaptiv-value("padding-bottom", 32, 18);
+			@include adaptiv-value("padding-left", 117, 99);
+			@include adaptiv-value("padding-right", 117, 99);
+			@include adaptiv-value("border-radius", 15, 5);
+			&:hover {
+				@extend %button-hover;
+			}
+		}
+		&__right {
+			display: inline-block;
+			@include adaptiv-value("width", 660, 300);
+			@include adaptiv-value("height", 660, 300);
+			background-image: url("../img/header__content.png");
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+}
+.skills {
+	@include adaptiv-value("padding-top", 100, 50);
+	&__title {
+		font-weight: 600;
+		@include adaptiv-value("font-size", 48, 24);
+		line-height: 80px;
+		text-align: center;
+		color: #000;
+		@include adaptiv-value("margin-bottom", 96, 32);
+	}
+}
+.cards {
+	&__wrapper {
+		display: grid;
+		grid-gap: 20px;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(2, auto);
+		grid-auto-rows: auto;
+		grid-template-areas:
+			"tall norm1 norm2"
+			"tall wide wide";
+	}
+	&__item {
+		background-color: #f5f5f5;
+		border-radius: 10px;
+		padding: 18px 40px;
+		@include adaptiv-value("padding-top", 18, 16);
+		@include adaptiv-value("padding-bottom", 18, 16);
+		@include adaptiv-value("padding-left", 40, 15);
+		@include adaptiv-value("padding-right", 40, 15);
+	}
+	&__item:nth-child(1) {
+		grid-area: tall;
+	}
+	&__item:nth-child(2) {
+		grid-area: norm1;
+	}
+	&__item:nth-child(3) {
+		grid-area: norm2;
+	}
+	&__item:nth-child(4) {
+		grid-area: wide;
+		.cards__content {
+			display: flex;
+			flex-direction: row-reverse;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.cards__info {
+			flex: 0 1 340px;
+		}
+	}
+	&__body {
+		min-height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	&__image-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		& img {
+			max-width: 100%;
+		}
+	}
+	&__title {
+		font-weight: 600;
+		@include adaptiv-value("font-size", 30, 18);
+		line-height: 80px;
+		color: $accent-color;
+	}
+	&__descr {
+		@include adaptiv-value("font-size", 16, 12);
+		@include adaptiv-value("line-height", 24, 18);
+		color: $text-color;
+		margin-bottom: 25px;
+	}
+	&__btn {
+		@extend %button-styles;
+		@include adaptiv-value("font-size", 20, 14);
+		@include adaptiv-value("line-height", 30, 21);
+		@include adaptiv-value("padding-top", 16, 14);
+		@include adaptiv-value("padding-bottom", 16, 14);
+		@include adaptiv-value("padding-left", 64, 42);
+		@include adaptiv-value("padding-right", 64, 42);
+		border-radius: 5px;
+		&:hover {
+			@extend %button-hover;
+		}
+	}
+}
+.about {
+	@include adaptiv-value("padding-top", 282, 50);
+	&__wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap-reverse;
+	}
+	&__left {
+		max-width: 635px;
+	}
+	&__title {
+		font-weight: 600;
+		@include adaptiv-value("font-size", 48, 24);
+		line-height: 80px;
+		color: #000;
+		margin-bottom: 23px;
+	}
+	&__descr {
+		@include adaptiv-value("font-size", 20, 14);
+		@include adaptiv-value("line-height", 30, 21);
+		color: $text-color;
+		@include adaptiv-value("margin-bottom", 40, 10);
+	}
+	&__right {
+		display: inline-block;
+		@include adaptiv-value("width", 500, 284);
+		@include adaptiv-value("height", 500, 284);
+		background-image: url("../img/about.png");
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+}
+.numbers {
+	display: flex;
+	&__item {
+		flex: 0 1 33.333%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	&__num {
+		font-weight: 600;
+		@include adaptiv-value("font-size", 48, 24);
+		line-height: 80px;
+		color: $accent-color;
+	}
+	&__name {
+		@include adaptiv-value("font-size", 20, 14);
+		@include adaptiv-value("line-height", 30, 21);
+		color: $text-color;
+	}
+}
+.pricing {
+	@include adaptiv-value("padding-top", 190, 50);
+	&__title {
+		font-weight: 600;
+		@include adaptiv-value("font-size", 48, 24);
+		line-height: 80px;
+		@include adaptiv-value("margin-bottom", 80, 50);
+		color: #000;
+		text-align: center;
+	}
+}
+.products {
+	&__wrapper {
+		display: flex;
+	}
+	&__item {
+		flex: 0 1 33.333%;
+		&:not(:last-child) {
+			padding-right: 30px;
+		}
+	}
+	&__body {
+		min-height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+	&__image-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		@include adaptiv-value("margin-bottom", 40, 30);
+		& img {
+			max-width: 100%;
+		}
+	}
+	&__title {
+		font-weight: 600;
+		@include adaptiv-value("font-size", 30, 18);
+		@include adaptiv-value("line-height", 48, 28);
+		color: $accent-color;
+		@include adaptiv-value("margin-bottom", 20, 30);
+	}
+	&__descr {
+		max-width: 430px;
+		@include adaptiv-value("font-size", 20, 14);
+		@include adaptiv-value("line-height", 30, 21);
+		color: $text-color;
+		@include adaptiv-value("margin-bottom", 30, 40);
+	}
+	&__price {
+		display: inline-block;
+		background-color: #eeeeee;
+		border-radius: 5px;
+		@include adaptiv-value("padding-left", 18, 12);
+		@include adaptiv-value("padding-right", 18, 12);
+	}
+	&__price-wrapper {
+		display: flex;
+		align-items: center;
+	}
+	&__price-num {
+		@include adaptiv-value("font-size", 30, 18);
+		@include adaptiv-value("line-height", 45, 27);
+		color: $accent-color;
+		margin-right: 8px;
+	}
+	&__price-per {
+		@include adaptiv-value("font-size", 18, 14);
+		@include adaptiv-value("line-height", 27, 21);
+		color: $text-color;
+	}
+}
+.contact {
+	@include adaptiv-value("padding-top", 260, 70);
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+	&__left {
+		display: inline-block;
+		@include adaptiv-value("width", 477, 253);
+		@include adaptiv-value("height", 429, 228);
+		background-image: url("../img/contact.png");
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	&__right {
+		flex: 0 1 770px;
+	}
+	&__title {
+		font-weight: 600;
+		@include adaptiv-value("font-size", 48, 24);
+		line-height: 80px;
+		color: #000;
+		margin-bottom: 20px;
+	}
+	&__descr {
+		@include adaptiv-value("font-size", 20, 14);
+		@include adaptiv-value("line-height", 30, 21);
+		color: $text-color;
+		@include adaptiv-value("margin-bottom", 50, 30);
+	}
+}
+.form {
+	&__input {
+		@include adaptiv-value("width", 450, 290);
+		margin-right: 12px;
+		border: 1px solid $text-color;
+		border-radius: 10px;
+		@include adaptiv-value("padding", 25, 20);
+		@include adaptiv-value("font-size", 20, 14);
+		@include adaptiv-value("line-height", 30, 21);
+		color: #000;
+		&::placeholder {
+			/* Chrome, Firefox, Opera, Safari 10.1+ */
+			opacity: 1; /* Firefox */
+			@include adaptiv-value("font-size", 16, 12);
+			@include adaptiv-value("line-height", 24, 18);
+			color: $text-color;
+		}
+		&::-ms-input-placeholder {
+			/* Edge */
+			@include adaptiv-value("font-size", 16, 12);
+			@include adaptiv-value("line-height", 24, 18);
+			color: $text-color;
+		}
+		&:-ms-input-placeholder {
+			/* IE 10-11 */
+			@include adaptiv-value("font-size", 16, 12);
+			@include adaptiv-value("line-height", 24, 18);
+			color: $text-color;
+		}
+	}
+	&__btn {
+		@extend %button-styles;
+		@include adaptiv-value("font-size", 20, 14);
+		@include adaptiv-value("line-height", 30, 21);
+		@include adaptiv-value("padding-top", 25, 20);
+		@include adaptiv-value("padding-bottom", 25, 20);
+		@include adaptiv-value("padding-left", 80, 110);
+		@include adaptiv-value("padding-right", 80, 110);
+		border-radius: 10px;
+		&:hover {
+			@extend %button-hover;
+		}
+	}
+}
+.footer {
+	@include adaptiv-value("padding-top", 130, 60);
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		border-top: 1px solid $text-color;
+		padding: 30px 0;
+	}
+	&__link {
+		@include adaptiv-value("font-size", 24, 10);
+		@include adaptiv-value("line-height", 36, 16);
+		color: $text-color;
+		transition: 0.3s;
+		&:hover {
+			color: darken($text-color, 30%);
+		}
+	}
+	&__dot {
+		@include adaptiv-value("font-size", 24, 11);
+		@include adaptiv-value("line-height", 36, 16);
+		color: $text-color;
+	}
+}
+@media screen and (max-width: 1149px) {
+	.header-content {
+		display: flex;
+		justify-content: center;
+		&__left {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			&::before {
+				display: none;
+			}
+		}
+		&__title {
+			text-align: center;
+			max-width: none;
+		}
+		&__descr {
+			text-align: center;
+		}
+	}
+	.cards {
+		&__wrapper {
+			grid-template-columns: repeat(2, 1fr);
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas:
+				"norm1 norm2"
+				"norm3 norm4";
+		}
+		&__item:nth-child(1) {
+			grid-area: norm1;
+		}
+		&__item:nth-child(2) {
+			grid-area: norm2;
+		}
+		&__item:nth-child(3) {
+			grid-area: norm3;
+		}
+		&__item:nth-child(4) {
+			grid-area: norm4;
+			.cards__content {
+				display: block;
+			}
+		}
+	}
+	.products {
+		&__wrapper {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		&__item {
+			flex: 0 1 100%;
+			display: flex;
+			justify-content: center;
+			&:not(:last-child) {
+				padding-right: 0;
+			}
+		}
+		&__body {
+			align-items: center;
+			max-width: 635px;
+		}
+		&__title {
+			text-align: center;
+		}
+		&__descr {
+			text-align: center;
+		}
+	}
+	.about {
+		justify-content: center;
+		&__wrapper {
+			justify-content: center;
+		}
+		&__left {
+			max-width: 635px;
+		}
+		&__title {
+			text-align: center;
+		}
+		&__descr {
+			text-align: center;
+		}
+	}
+	.contact {
+		&__wrapper {
+			justify-content: center;
+		}
+		&__title {
+			text-align: center;
+		}
+		&__descr {
+			text-align: center;
+		}
+	}
+	.form {
+		&__wrapper {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}
+@media screen and (max-width: 739px) {
+	.header-top {
+		&__nav {
+			display: none;
+		}
+		&__btn {
+			display: none;
+		}
+	}
+	.burger {
+		display: inline-block;
+	}
+	.burger-menu{
+		display: block;
+	}
+	.cards {
+		&__wrapper {
+			grid-template-columns: repeat(1, 1fr);
+			grid-template-rows: repeat(1, auto);
+			grid-template-areas:
+				"norm1"
+				"norm2"
+				"norm3"
+				"norm4";
+		}
+		&__item:nth-child(1) {
+			grid-area: norm1;
+		}
+		&__item:nth-child(2) {
+			grid-area: norm2;
+		}
+		&__item:nth-child(3) {
+			grid-area: norm3;
+		}
+		&__item:nth-child(4) {
+			grid-area: norm4;
+		}
+	}
+	.form {
+		&__wrapper {
+			flex-direction: column;
+		}
+		&__input {
+			margin-right: 0;
+			margin-bottom: 20px;
+		}
+	}
+}
+@media screen and (max-width: 539px) {
+	.about {
+		&__wrapper {
+			justify-content: center;
+		}
+		&__left {
+			max-width: 635px;
+		}
+		&__title {
+			text-align: center;
+		}
+		&__descr {
+			text-align: center;
+		}
+		&__numbers {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+	.numbers__item:not(:last-child) {
+		margin-bottom: 30px;
+	}
+	.footer {
+		&__wrapper {
+			flex-direction: column;
+		}
+		&__logo-wrapper {
+			margin-bottom: 20px;
+		}
+	}
+}
